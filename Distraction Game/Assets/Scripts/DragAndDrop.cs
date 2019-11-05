@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class DragAndDrop : MonoBehaviour
 {
+    
+
     public float DragDelay;
     private float currentDelay;
     public float drainEnergy;
     GameManager manager;
     private bool selected;
     private bool delaying = false;
+
+    public DistractionProperties properties;
     private void Start()
     {
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
@@ -18,6 +22,10 @@ public class DragAndDrop : MonoBehaviour
     }
     void Update()
     {
+        if(properties.health <= 0)
+        {
+            Destroy(gameObject);
+        }
         if (selected == true)
         {
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -48,10 +56,10 @@ public class DragAndDrop : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if (!delaying) { manager.energy -= drainEnergy; }
+        if (!delaying) {
+            manager.energy -= drainEnergy;
+            properties.health -= 1;
+        }
         delaying = true;
-        
-        
-
     }
 }

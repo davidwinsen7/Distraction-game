@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2959694356431597902}
   - component: {fileID: 2959694356431597890}
   m_Layer: 9
-  m_Name: Distraction 1
+  m_Name: Nap
   m_TagString: Distractions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,3 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DragDelay: 1
   drainEnergy: 1
+  properties:
+    health: 3
+    duration: 0
+    affectEnergy: 0
+    affectProgress: 0
+    itemDrop: []

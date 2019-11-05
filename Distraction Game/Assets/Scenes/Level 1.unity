@@ -2292,5 +2292,10 @@ PrefabInstance:
       propertyPath: SpawnPoints.Array.data[11]
       value: 
       objectReference: {fileID: 1329886940}
+    - target: {fileID: 7043516602770181010, guid: bd6441767bf11ed45afc5197efb7188a,
+        type: 3}
+      propertyPath: distractions.Array.data[1].name
+      value: Nap
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd6441767bf11ed45afc5197efb7188a, type: 3}
