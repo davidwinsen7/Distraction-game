@@ -23,19 +23,19 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if(gameState == State.COUNTDOWN)
+        
+        if (gameState != State.COUNTDOWN)
         {
-            countDown -= Time.deltaTime;
+            currentDeadline -= Time.deltaTime;
         }
-        //Debug.Log(countDown);
+        else { countDown -= Time.deltaTime; }
         if (countDown <= 0 && gameState == State.COUNTDOWN)
         {
             gameState = State.GAMEPLAY;
         }
 
         if (gameState == State.GAMEPLAY)
-        { 
-            currentDeadline -= Time.deltaTime;
+        {        
             progress += Time.deltaTime * 2;
             spawner.SetActive(true);
         }

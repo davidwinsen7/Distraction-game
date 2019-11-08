@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    
+    GameManager manager;
+    private void Start()
+    {
+        manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Distractions"))
         {
-            switch (collision.gameObject.name)
-            {
-                case "Sleep(Clone)":
-                    Destroy(collision.gameObject);
-                    break;
-                case "Nap(Clone)":
-                    Destroy(collision.gameObject);
-                    break;
-            }
+            float duration = collision.GetComponent<DragAndDrop>().properties.duration;
+            Destroy(collision.gameObject);
+            manager.gameState = GameManager.State.DISTRACTED;
+            StartCoroutine(distracted(duration));
         }
     }
- 
+    IEnumerator distracted(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        manager.gameState = GameManager.State.GAMEPLAY;
+    }
+
 }
