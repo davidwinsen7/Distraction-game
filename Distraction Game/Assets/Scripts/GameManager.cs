@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State{ COUNTDOWN, GAMEPLAY, GAMEOVER };
+    public enum State{ COUNTDOWN, GAMEPLAY, DISTRACTED, GAMEOVER };
 
     public GameObject spawner;
     public float Deadline;
     [HideInInspector]public float currentDeadline;
     [HideInInspector]public float progress;
     public float energy = 100f;
-    float countDown;
+    [HideInInspector]public float countDown;
     [SerializeField] float SetCountDown = 5f;
     public State gameState;
     private void Start()
@@ -21,13 +21,14 @@ public class GameManager : MonoBehaviour
         gameState = State.COUNTDOWN;
         countDown = SetCountDown;
     }
-   
-    bool Pause = false;
     void Update()
     {
-        countDown -= Time.deltaTime;
+        if(gameState == State.COUNTDOWN)
+        {
+            countDown -= Time.deltaTime;
+        }
         //Debug.Log(countDown);
-        if (countDown <= 0)
+        if (countDown <= 0 && gameState == State.COUNTDOWN)
         {
             gameState = State.GAMEPLAY;
         }
@@ -38,7 +39,6 @@ public class GameManager : MonoBehaviour
             progress += Time.deltaTime * 2;
             spawner.SetActive(true);
         }
-        else { return; }
-                  
+        else { return; }                
     }
 }

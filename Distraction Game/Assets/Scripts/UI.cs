@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class UI : MonoBehaviour
 {
     GameManager manager;
     private int roundedDeadline;
+
+    [SerializeField] TextMeshProUGUI countdown;
+    [SerializeField] GameObject countdownUI;
 
     [Header("Deadline Management")]
     [SerializeField] Text deadlineUI;
@@ -37,6 +41,12 @@ public class UI : MonoBehaviour
     }
     private void Update()
     {
+        int m_countdown = (int)manager.countDown;
+        countdown.text = m_countdown.ToString();
+        if(manager.gameState == GameManager.State.GAMEPLAY)
+        {
+            countdownUI.SetActive(false);
+        }
         UpdateTimer();
         UpdateProgress();
         UpdateEnergy();
