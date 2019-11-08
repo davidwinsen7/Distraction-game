@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
+    enum distractionCode
+    {
+        Sleeping = 0,
+        Nap = 1
+    };
+    [SerializeField] TextMeshProUGUI[] distractedUI;
     GameManager manager;
     private void Start()
     {
@@ -14,14 +21,27 @@ public class PlayerScript : MonoBehaviour
         if (collision.CompareTag("Distractions"))
         {
             float duration = collision.GetComponent<DragAndDrop>().properties.duration;
+            string name = collision.gameObject.name;
             Destroy(collision.gameObject);
             manager.gameState = GameManager.State.DISTRACTED;
-            StartCoroutine(distracted(duration));
+            StartCoroutine(distracted(duration, name));
         }
     }
-    IEnumerator distracted(float duration)
+    IEnumerator distracted(float duration, string name)
     {
-        yield return new WaitForSeconds(duration);
+        switch (name)
+        {
+            case "Sleep(Clone)":
+                distractedUI[(int)distractionCode.Sleeping].enabled = true;
+                yield return new WaitForSeconds(duration);
+                distractedUI[(int)distractionCode.Sleeping].enabled = false;
+                break;
+            case "Nap(Clone)":
+                distractedUI[(int)distractionCode.Nap].enabled = true;
+                yield return new WaitForSeconds(duration);
+                distractedUI[(int)distractionCode.Nap].enabled = false;
+                break;
+        }     
         manager.gameState = GameManager.State.GAMEPLAY;
     }
 

@@ -127,6 +127,8 @@ MonoBehaviour:
   DragDelay: 1
   drainEnergy: 1
   properties:
+    textUI: {fileID: 8571442390756341249, guid: b1a065cae1665fa4685ae0fbc0f65b23,
+      type: 3}
     health: 3
     duration: 5
     affectEnergy: 0

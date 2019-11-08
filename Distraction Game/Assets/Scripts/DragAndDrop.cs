@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class DragAndDrop : MonoBehaviour
 {
-    
-
     public float DragDelay;
     private float currentDelay;
     public float drainEnergy;

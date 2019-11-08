@@ -128,7 +128,7 @@ MonoBehaviour:
   drainEnergy: 1
   properties:
     health: 3
-    duration: 0
+    duration: 3
     affectEnergy: 0
     affectProgress: 0
     itemDrop: []
