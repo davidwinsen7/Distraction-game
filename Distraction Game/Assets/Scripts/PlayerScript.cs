@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
         Sleeping = 0,
         Nap = 1
     };
-    [SerializeField] TextMeshProUGUI[] distractedUI;
+    [SerializeField] GameObject[] distractedUI;
     GameManager manager;
     private void Start()
     {
@@ -33,16 +33,16 @@ public class PlayerScript : MonoBehaviour
         switch (name)
         {
             case "Sleep(Clone)":
-                distractedUI[(int)distractionCode.Sleeping].enabled = true;
+                distractedUI[(int)distractionCode.Sleeping].SetActive(true);
                 yield return new WaitForSeconds(duration);
                 manager.energy += affectEnergy;
-                distractedUI[(int)distractionCode.Sleeping].enabled = false;
+                distractedUI[(int)distractionCode.Sleeping].SetActive(false);
                 break;
             case "Nap(Clone)":
-                distractedUI[(int)distractionCode.Nap].enabled = true;
+                distractedUI[(int)distractionCode.Nap].SetActive(true);
                 yield return new WaitForSeconds(duration);
                 manager.energy += affectEnergy;
-                distractedUI[(int)distractionCode.Nap].enabled = false;
+                distractedUI[(int)distractionCode.Nap].SetActive(false);
                 break;
         }     
         manager.gameState = GameManager.State.GAMEPLAY;
