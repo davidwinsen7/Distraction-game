@@ -7,7 +7,7 @@ public class DragAndDrop : MonoBehaviour
 {
     public float DragDelay;
     private float currentDelay;
-    public float drainEnergy;
+    public float drainEnergy; //Energy drained per 1 drag and drop
     GameManager manager;
     private bool selected;
     private bool delaying = false;
@@ -47,14 +47,14 @@ public class DragAndDrop : MonoBehaviour
   
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && delaying == false)
+        if (Input.GetMouseButtonDown(0) && delaying == false && manager.energy > 0&&manager.gameState == GameManager.State.GAMEPLAY)
         {
             selected = true;
         }
     }
     private void OnMouseUp()
     {
-        if (!delaying) {
+        if (!delaying && manager.energy >0 && manager.gameState == GameManager.State.GAMEPLAY) {
             manager.energy -= drainEnergy;
             properties.health -= 1;
         }

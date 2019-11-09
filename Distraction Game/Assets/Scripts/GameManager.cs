@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public float Deadline;
     [HideInInspector]public float currentDeadline;
     [HideInInspector]public float progress;
+
+    [Range(0f,100f)]
     public float energy = 100f;
     [HideInInspector]public float countDown;
     [SerializeField] float SetCountDown = 5f;
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        
+        energy = Mathf.Clamp(energy, 0f, 100f);
         if (gameState != State.COUNTDOWN)
         {
             currentDeadline -= Time.deltaTime;
@@ -41,4 +43,5 @@ public class GameManager : MonoBehaviour
         }
         else { return; }                
     }
+  
 }

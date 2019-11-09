@@ -41,8 +41,7 @@ public class UI : MonoBehaviour
     }
     private void Update()
     {
-        int m_countdown = (int)manager.countDown;
-        countdown.text = m_countdown.ToString();
+        countdown.text = ((int)manager.countDown).ToString();
         if(manager.gameState == GameManager.State.GAMEPLAY)
         {
             countdownUI.SetActive(false);

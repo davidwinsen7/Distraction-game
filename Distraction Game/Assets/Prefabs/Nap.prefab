@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DragDelay: 1
-  drainEnergy: 1
+  drainEnergy: 5
   properties:
     health: 3
     duration: 3
-    affectEnergy: 0
+    affectEnergy: 10
     affectProgress: 0
     itemDrop: []
