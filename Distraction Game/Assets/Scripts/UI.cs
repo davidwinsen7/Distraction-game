@@ -8,6 +8,8 @@ public class UI : MonoBehaviour
     GameManager manager;
     private int roundedDeadline;
 
+    [SerializeField] GameObject levelCompleteUI;
+
     [SerializeField] TextMeshProUGUI countdown;
     [SerializeField] GameObject countdownUI;
 
@@ -45,6 +47,14 @@ public class UI : MonoBehaviour
         if(manager.gameState == GameManager.State.GAMEPLAY)
         {
             countdownUI.SetActive(false);
+        }
+        else if(manager.gameState == GameManager.State.COMPLETE)
+        {
+            levelCompleteUI.SetActive(true);
+        }
+        else
+        {
+            levelCompleteUI.SetActive(false);
         }
         UpdateTimer();
         UpdateProgress();

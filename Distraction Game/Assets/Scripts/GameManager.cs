@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State{ COUNTDOWN, GAMEPLAY, DISTRACTED, GAMEOVER };
+    public enum State{ COUNTDOWN, GAMEPLAY, DISTRACTED, GAMEOVER ,COMPLETE};
 
     public GameObject spawner;
     public float Deadline;
@@ -26,22 +26,28 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         energy = Mathf.Clamp(energy, 0f, 100f);
-        if (gameState != State.COUNTDOWN)
+        
+        if (gameState == State.COUNTDOWN)
+        {
+            countDown -= Time.deltaTime;
+            if(countDown <= 0)
+            gameState = State.GAMEPLAY;
+        }
+        if (gameState == State.GAMEPLAY||gameState == State.DISTRACTED)
         {
             currentDeadline -= Time.deltaTime;
         }
-        else { countDown -= Time.deltaTime; }
-        if (countDown <= 0 && gameState == State.COUNTDOWN)
-        {
-            gameState = State.GAMEPLAY;
-        }
-
         if (gameState == State.GAMEPLAY)
         {        
             progress += Time.deltaTime * 2;
             spawner.SetActive(true);
         }
-        else { return; }                
+        else { return; }
+        if (progress >= 100f)
+        {
+            gameState = State.COMPLETE;
+        }
+                     
     }
   
 }
