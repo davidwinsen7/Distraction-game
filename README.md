@@ -1,9 +1,16 @@
 # Distraction-game
 A game about a student who needs to completes his project before the deadline while avoiding distractions around him.
+Goal of the game: Reach 100% progression before time runs out
 
-First project commit includes core gameplay mechanism such as:
-1. Basic graphics interface (Cubes, circles, etc.)
-2. A countdown of 5s before gameplay start
-3. Distractions(circles) move towards the student(Square) in the center
-4. Camera zoom in zoom out mechanism with mouse scrollwheel.
-5. Timer in upper left corner, representing deadline of each level.
+Gameplay so far:
+1. A student in the middle of the screen, can zoom-in and zoom-out camera.
+2. Distractions will spawn and move towards student.
+3. Player can drag and drop the distractions to avoid them from touching the students.
+4. Each time player move a distraction, energies will be consumed.
+5. Player can't move distractions when there is no energy.
+6. A way to restore energies is to consume "resting" distractions (sleep, etc.)
+7. When a distraction touches the student, game enters "distracted" state.
+    - Progress bar will stop moving
+    - Time will continue to flows.
+    - Different distractions have different "distracted" duration
+    - Distractions can either restore or consume energies.
