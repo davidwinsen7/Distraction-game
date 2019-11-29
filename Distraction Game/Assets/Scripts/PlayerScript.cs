@@ -8,7 +8,8 @@ public class PlayerScript : MonoBehaviour
     enum distractionCode
     {
         Sleeping = 0,
-        Nap = 1
+        Nap = 1,
+        Gaming = 2
     };
     [SerializeField] GameObject[] distractedUI;
     GameManager manager;
@@ -43,6 +44,12 @@ public class PlayerScript : MonoBehaviour
                 yield return new WaitForSeconds(duration);
                 manager.energy += affectEnergy;
                 distractedUI[(int)distractionCode.Nap].SetActive(false);
+                break;
+            case "Gaming(Clone)":
+                distractedUI[(int)distractionCode.Gaming].SetActive(true);
+                yield return new WaitForSeconds(duration);
+                manager.energy += affectEnergy;
+                distractedUI[(int)distractionCode.Gaming].SetActive(false);
                 break;
         }     
         manager.gameState = GameManager.State.GAMEPLAY;
