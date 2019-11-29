@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         energy = Mathf.Clamp(energy, 0f, 100f);
-        
+        currentDeadline = Mathf.Clamp(currentDeadline, 0f, Deadline);
         if (gameState == State.COUNTDOWN)
         {
             countDown -= Time.deltaTime;
@@ -43,9 +43,13 @@ public class GameManager : MonoBehaviour
             spawner.SetActive(true);
         }
         else { return; }
-        if (progress >= 100f)
+        if (progress >= 100f && currentDeadline > 0f)
         {
             gameState = State.COMPLETE;
+        }
+        else if(progress < 100f && currentDeadline <= 0)
+        {
+            gameState = State.GAMEOVER;
         }
                      
     }

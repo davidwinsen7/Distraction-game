@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2959694356431597901}
   - component: {fileID: 2959694356431597902}
   - component: {fileID: 2959694356431597890}
+  - component: {fileID: 7694900249037423220}
   m_Layer: 8
   m_Name: Sleep
   m_TagString: Distractions
@@ -132,3 +133,22 @@ MonoBehaviour:
     affectEnergy: 25
     affectProgress: 0
     itemDrop: []
+--- !u!95 &7694900249037423220
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2959694356431597889}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b8dbcf4ff837cc144b58fc8e694f3c9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

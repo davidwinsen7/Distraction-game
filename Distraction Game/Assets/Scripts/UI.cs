@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     private int roundedDeadline;
 
     [SerializeField] GameObject levelCompleteUI;
+    [SerializeField] GameObject GameOverUI;
 
     [SerializeField] TextMeshProUGUI countdown;
     [SerializeField] GameObject countdownUI;
@@ -37,18 +38,9 @@ public class UI : MonoBehaviour
         energyBar.value = manager.energy;
     }
     
-    private void Start()
-    {
-        manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-    }
-    private void Update()
-    {
-        countdown.text = ((int)manager.countDown).ToString();
-        if(manager.gameState == GameManager.State.GAMEPLAY)
-        {
-            countdownUI.SetActive(false);
-        }
-        else if(manager.gameState == GameManager.State.COMPLETE)
+    void CheckCompletion()
+    {     
+        if (manager.gameState == GameManager.State.COMPLETE)
         {
             levelCompleteUI.SetActive(true);
         }
@@ -56,6 +48,33 @@ public class UI : MonoBehaviour
         {
             levelCompleteUI.SetActive(false);
         }
+    }
+
+    void CheckGameOver()
+    {
+        if (manager.gameState == GameManager.State.GAMEOVER)
+        {
+            GameOverUI.SetActive(true);
+        }
+        else
+        {
+            GameOverUI.SetActive(false);
+        }
+    }
+
+    private void Start()
+    {
+        manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    }
+    private void Update()
+    {
+        countdown.text = ((int)manager.countDown).ToString();
+        if (manager.gameState == GameManager.State.GAMEPLAY)
+        {
+            countdownUI.SetActive(false);
+        }
+        CheckCompletion();
+        CheckGameOver();
         UpdateTimer();
         UpdateProgress();
         UpdateEnergy();

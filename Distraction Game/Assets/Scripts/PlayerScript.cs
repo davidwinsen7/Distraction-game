@@ -9,13 +9,37 @@ public class PlayerScript : MonoBehaviour
     {
         Sleeping = 0,
         Nap = 1,
-        Gaming = 2
+        Gaming = 2,
+        Texting = 3
     };
+    [SerializeField] GameObject happyFace;
+    [SerializeField] GameObject tiredFace;
     [SerializeField] GameObject[] distractedUI;
     GameManager manager;
     private void Start()
     {
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    }
+    void expressionHappy()
+    {
+        happyFace.SetActive(true);
+        tiredFace.SetActive(false);
+    }
+    void expressionTired()
+    {
+        tiredFace.SetActive(true);
+        happyFace.SetActive(false);
+    }
+    private void Update()
+    {
+        if(manager.energy <= 30)
+        {
+            expressionTired();
+        }
+        else
+        {
+            expressionHappy();
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,6 +74,12 @@ public class PlayerScript : MonoBehaviour
                 yield return new WaitForSeconds(duration);
                 manager.energy += affectEnergy;
                 distractedUI[(int)distractionCode.Gaming].SetActive(false);
+                break;
+            case "Texting(Clone)":
+                distractedUI[(int)distractionCode.Texting].SetActive(true);
+                yield return new WaitForSeconds(duration);
+                manager.energy += affectEnergy;
+                distractedUI[(int)distractionCode.Texting].SetActive(false);
                 break;
         }     
         manager.gameState = GameManager.State.GAMEPLAY;

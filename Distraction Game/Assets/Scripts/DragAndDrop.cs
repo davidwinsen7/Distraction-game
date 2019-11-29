@@ -11,10 +11,12 @@ public class DragAndDrop : MonoBehaviour
     GameManager manager;
     private bool selected;
     private bool delaying = false;
+    private Animator anim;
 
     public DistractionProperties properties;
     private void Start()
     {
+        anim = GetComponent<Animator>();
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         currentDelay = DragDelay;
     }
@@ -26,6 +28,7 @@ public class DragAndDrop : MonoBehaviour
         }
         if (selected == true)
         {
+            
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector2(cursorPos.x, cursorPos.y);
         }
@@ -49,12 +52,13 @@ public class DragAndDrop : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && delaying == false && manager.energy > 0&&manager.gameState == GameManager.State.GAMEPLAY)
         {
+            anim.SetTrigger("Clicked");
             selected = true;
         }
     }
     private void OnMouseUp()
     {
-        if (!delaying && manager.energy >0 && manager.gameState == GameManager.State.GAMEPLAY) {
+        if (!delaying && manager.energy >0 && manager.gameState == GameManager.State.GAMEPLAY) {      
             manager.energy -= drainEnergy;
             properties.health -= 1;
         }
