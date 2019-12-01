@@ -10,7 +10,8 @@ public class PlayerScript : MonoBehaviour
         Sleeping = 0,
         Nap = 1,
         Gaming = 2,
-        Texting = 3
+        Texting = 3,
+        Eat = 4
     };
     [SerializeField] GameObject happyFace;
     [SerializeField] GameObject tiredFace;
@@ -80,6 +81,12 @@ public class PlayerScript : MonoBehaviour
                 yield return new WaitForSeconds(duration);
                 manager.energy += affectEnergy;
                 distractedUI[(int)distractionCode.Texting].SetActive(false);
+                break;
+            case "Eat(Clone)":
+                distractedUI[(int)distractionCode.Eat].SetActive(true);
+                yield return new WaitForSeconds(duration);
+                manager.energy += affectEnergy;
+                distractedUI[(int)distractionCode.Eat].SetActive(false);
                 break;
         }     
         manager.gameState = GameManager.State.GAMEPLAY;
