@@ -15,11 +15,14 @@ public class PlayerScript : MonoBehaviour
     };
     [SerializeField] GameObject happyFace;
     [SerializeField] GameObject tiredFace;
-    [SerializeField] GameObject[] distractedUI;
+    [SerializeField] GameObject resistUI;
+    public GameObject[] distractedUI;
     GameManager manager;
+    Resisting resistUIScript;
     private void Start()
     {
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        
     }
     void expressionHappy()
     {
@@ -51,11 +54,14 @@ public class PlayerScript : MonoBehaviour
             string name = collision.gameObject.name;
             Destroy(collision.gameObject);
             manager.gameState = GameManager.State.DISTRACTED;
+            resistUI.SetActive(true);
+            resistUIScript = FindObjectOfType<Resisting>().GetComponent<Resisting>();
             StartCoroutine(distracted(duration, affectEnergy, name));
         }
     }
     IEnumerator distracted(float duration, float affectEnergy, string name)
     {
+        
         switch (name)
         {
             case "Sleep(Clone)":
@@ -90,6 +96,9 @@ public class PlayerScript : MonoBehaviour
                 break;
         }     
         manager.gameState = GameManager.State.GAMEPLAY;
+        resistUIScript.resistanceBar.value = 0f;
+        resistUI.SetActive(false);
+        
     }
 
 }

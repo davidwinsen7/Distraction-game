@@ -14,14 +14,19 @@ public class GameManager : MonoBehaviour
 
     [Range(0f,100f)]
     public float energy = 100f;
+    public float progressMultiplier = 2f;
+
     [HideInInspector]public float countDown;
     [SerializeField] float SetCountDown = 5f;
     public State gameState;
+
+    PlayerScript player;
     private void Start()
     {
         currentDeadline = Deadline;
         gameState = State.COUNTDOWN;
         countDown = SetCountDown;
+        player = FindObjectOfType<PlayerScript>().GetComponent<PlayerScript>();
     }
     void Update()
     {
@@ -39,8 +44,12 @@ public class GameManager : MonoBehaviour
         }
         if (gameState == State.GAMEPLAY)
         {        
-            progress += Time.deltaTime * 2;
+            progress += Time.deltaTime * progressMultiplier;
             spawner.SetActive(true);
+            for (int i = 0; i < player.distractedUI.Length; i++)
+            {
+                player.distractedUI[i].SetActive(false);
+            }
         }
         else { return; }
         if (progress >= 100f && currentDeadline > 0f)
