@@ -11,7 +11,8 @@ public class PlayerScript : MonoBehaviour
         Nap = 1,
         Gaming = 2,
         Texting = 3,
-        Eat = 4
+        Eat = 4,
+        Snack = 5
     };
     [SerializeField] GameObject happyFace;
     [SerializeField] GameObject tiredFace;
@@ -47,7 +48,7 @@ public class PlayerScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Distractions"))
+        if (collision.CompareTag("Distractions") && manager.gameState != GameManager.State.DISTRACTED)
         {
             float duration = collision.GetComponent<DragAndDrop>().properties.duration;
             float affectEnergy = collision.GetComponent<DragAndDrop>().properties.affectEnergy;

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Range(0f,100f)]
     public float energy = 100f;
     public float progressMultiplier = 2f;
+    [HideInInspector] public float usedProgressMultiplier;
 
     [HideInInspector]public float countDown;
     [SerializeField] float SetCountDown = 5f;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
         gameState = State.COUNTDOWN;
         countDown = SetCountDown;
         player = FindObjectOfType<PlayerScript>().GetComponent<PlayerScript>();
+        usedProgressMultiplier = progressMultiplier;
     }
     void Update()
     {
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
         if (gameState == State.GAMEPLAY)
         {        
-            progress += Time.deltaTime * progressMultiplier;
+            progress += Time.deltaTime * usedProgressMultiplier;
             spawner.SetActive(true);
             for (int i = 0; i < player.distractedUI.Length; i++)
             {
@@ -55,12 +57,12 @@ public class GameManager : MonoBehaviour
         if (progress >= 100f && currentDeadline > 0f)
         {
             gameState = State.COMPLETE;
+            spawner.SetActive(false);
         }
         else if(progress < 100f && currentDeadline <= 0)
         {
             gameState = State.GAMEOVER;
-        }
-                     
-    }
-  
+            spawner.SetActive(false);
+        }                    
+    }  
 }

@@ -37,7 +37,9 @@ public class UI : MonoBehaviour
     {
         energyBar.value = manager.energy;
     }
+
     
+
     void CheckCompletion()
     {     
         if (manager.gameState == GameManager.State.COMPLETE)
