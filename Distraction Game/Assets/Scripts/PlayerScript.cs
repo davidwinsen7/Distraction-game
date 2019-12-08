@@ -19,11 +19,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject resistUI;
     public GameObject[] distractedUI;
     GameManager manager;
+    ItemManager ItmManager;
+    bool isBrainStorming;
     Resisting resistUIScript;
     private void Start()
     {
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
-        
+        ItmManager = FindObjectOfType<ItemManager>().GetComponent<ItemManager>();
     }
     void expressionHappy()
     {
@@ -37,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     }
     private void Update()
     {
+        isBrainStorming = ItmManager.Items[(int)ItemManager.ItemCode.brainStorm].Active;
         if(manager.energy <= 30)
         {
             expressionTired();
@@ -50,14 +53,23 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.CompareTag("Distractions") && manager.gameState != GameManager.State.DISTRACTED)
         {
-            float duration = collision.GetComponent<DragAndDrop>().properties.duration;
-            float affectEnergy = collision.GetComponent<DragAndDrop>().properties.affectEnergy;
-            string name = collision.gameObject.name;
-            Destroy(collision.gameObject);
-            manager.gameState = GameManager.State.DISTRACTED;
-            resistUI.SetActive(true);
-            resistUIScript = FindObjectOfType<Resisting>().GetComponent<Resisting>();
-            StartCoroutine(distracted(duration, affectEnergy, name));
+            if (isBrainStorming)
+            {
+                Destroy(collision.gameObject);
+                //"destroyedWithoutEffect" particle
+            }
+            else
+            {
+                float duration = collision.GetComponent<DragAndDrop>().properties.duration;
+                float affectEnergy = collision.GetComponent<DragAndDrop>().properties.affectEnergy;
+                string name = collision.gameObject.name;
+                Destroy(collision.gameObject);
+                manager.gameState = GameManager.State.DISTRACTED;
+                resistUI.SetActive(true);
+                resistUIScript = FindObjectOfType<Resisting>().GetComponent<Resisting>();
+                StartCoroutine(distracted(duration, affectEnergy, name));
+            }
+            
         }
     }
     IEnumerator distracted(float duration, float affectEnergy, string name)
@@ -94,6 +106,12 @@ public class PlayerScript : MonoBehaviour
                 yield return new WaitForSeconds(duration);
                 manager.energy += affectEnergy;
                 distractedUI[(int)distractionCode.Eat].SetActive(false);
+                break;
+            case "Snack(Clone)":
+                distractedUI[(int)distractionCode.Snack].SetActive(true);
+                yield return new WaitForSeconds(duration);
+                manager.energy += affectEnergy;
+                distractedUI[(int)distractionCode.Snack].SetActive(false);
                 break;
         }     
         manager.gameState = GameManager.State.GAMEPLAY;

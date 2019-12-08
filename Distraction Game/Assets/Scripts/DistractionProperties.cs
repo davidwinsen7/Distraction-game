@@ -10,4 +10,5 @@ public class DistractionProperties
     public float affectEnergy; //Affected energy whenever distracted by this distraction
     public float affectProgress;
     public GameObject[] itemDrop;
+    public int itemDropPercentage;
 }

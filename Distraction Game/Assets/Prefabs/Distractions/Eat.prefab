@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2959694356431597890}
   - component: {fileID: 3180189286341477226}
   m_Layer: 0
-  m_Name: Gaming
+  m_Name: Eat
   m_TagString: Distractions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 4ccceb236efbbd24ab62ff4a24dbca7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55a021bde2304f5458c7caf244dd6846, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,13 +126,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DragDelay: 1
-  drainEnergy: 3
+  drainEnergy: 1
   properties:
-    health: 5
+    health: 3
     duration: 5
-    affectEnergy: -25
+    affectEnergy: 10
     affectProgress: 0
-    itemDrop: []
+    itemDrop:
+    - {fileID: 6832896448348906076, guid: 0e4ef02abc1802c4eb630aba0379fd91, type: 3}
+    - {fileID: 6832896448348906076, guid: 05f99c91e118dfe47afd73f59fc86f39, type: 3}
+    itemDropPercentage: 12
 --- !u!95 &3180189286341477226
 Animator:
   serializedVersion: 3

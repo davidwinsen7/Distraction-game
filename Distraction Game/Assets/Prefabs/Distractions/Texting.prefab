@@ -132,7 +132,10 @@ MonoBehaviour:
     duration: 7
     affectEnergy: -10
     affectProgress: 0
-    itemDrop: []
+    itemDrop:
+    - {fileID: 6832896448348906076, guid: 0e4ef02abc1802c4eb630aba0379fd91, type: 3}
+    - {fileID: 6832896448348906076, guid: 05f99c91e118dfe47afd73f59fc86f39, type: 3}
+    itemDropPercentage: 12
 --- !u!95 &3180189286341477226
 Animator:
   serializedVersion: 3

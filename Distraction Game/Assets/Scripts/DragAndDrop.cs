@@ -24,6 +24,7 @@ public class DragAndDrop : MonoBehaviour
     {
         if(properties.health <= 0)
         {
+            DropItem();
             Destroy(gameObject);
         }
         if (selected == true)
@@ -47,7 +48,15 @@ public class DragAndDrop : MonoBehaviour
         }
        
     }
-  
+    void DropItem()
+    {
+        int index = Random.Range(0, properties.itemDropPercentage + 1);
+        //i.e. itemdropPercentage+1 =10+1 , Range(0,11)
+        if (index < properties.itemDrop.Length)
+        {
+            Instantiate(properties.itemDrop[index], transform.position, transform.rotation); //Drop Item if index < itemDrop.Length
+        }
+    }
     private void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0) && delaying == false && manager.energy > 0&&manager.gameState == GameManager.State.GAMEPLAY)
