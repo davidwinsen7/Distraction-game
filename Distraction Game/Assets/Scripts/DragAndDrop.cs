@@ -50,7 +50,8 @@ public class DragAndDrop : MonoBehaviour
     }
     void DropItem()
     {
-        int index = Random.Range(0, properties.itemDropPercentage + 1);
+        int index = Random.Range(0, properties.itemDropPercentage);
+        Debug.Log(index);
         //i.e. itemdropPercentage+1 =10+1 , Range(0,11)
         if (index < properties.itemDrop.Length)
         {
@@ -59,7 +60,7 @@ public class DragAndDrop : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && delaying == false && manager.energy > 0&&manager.gameState == GameManager.State.GAMEPLAY)
+        if (Input.GetMouseButtonDown(0) && delaying == false && manager.energy > 0&&manager.gameState == GameManager.State.GAMEPLAY && Time.timeScale != 0)
         {
             anim.SetTrigger("Clicked");
             selected = true;

@@ -64,6 +64,32 @@ public class UI : MonoBehaviour
         }
     }
 
+    [SerializeField] GameObject PauseUI;
+    bool gameIsPaused = false;
+    public void pauseMethod()
+    {    
+        if (!gameIsPaused)
+        {
+            PauseUI.SetActive(true);
+            Time.timeScale = 0;
+            gameIsPaused = true;
+        }
+        else
+        {
+            PauseUI.SetActive(false);
+            Time.timeScale = 1;
+            gameIsPaused = false;
+        }
+          
+    }
+    void pauseSystem()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMethod();
+        }
+    }
+
     private void Start()
     {
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
@@ -75,6 +101,7 @@ public class UI : MonoBehaviour
         {
             countdownUI.SetActive(false);
         }
+        pauseSystem();
         CheckCompletion();
         CheckGameOver();
         UpdateTimer();
