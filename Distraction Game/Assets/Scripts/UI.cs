@@ -15,7 +15,7 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject countdownUI;
 
     [Header("Deadline Management")]
-    [SerializeField] Text deadlineUI;
+    [SerializeField] TextMeshProUGUI deadlineUI;
     [SerializeField] Image deadlineBar;
     void UpdateTimer()
     {
