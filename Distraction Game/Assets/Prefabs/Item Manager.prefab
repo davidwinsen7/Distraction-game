@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3223911383923112899
+--- !u!1 &3413044208624952228
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3223911383923112897}
-  - component: {fileID: 3223911383923112896}
+  - component: {fileID: 3413044208624952230}
+  - component: {fileID: 3413044208624952229}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Item Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3223911383923112897
+--- !u!4 &3413044208624952230
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223911383923112899}
+  m_GameObject: {fileID: 3413044208624952228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 927.44574, y: 1325.0206, z: -194.53545}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3223911383923112896
+--- !u!114 &3413044208624952229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3223911383923112899}
+  m_GameObject: {fileID: 3413044208624952228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 553e887812abec14dacd41081079d5d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 122982afb2d73c74a960099881a37a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
-  Deadline: 30
-  currentDeadline: 0
-  progress: 0
-  energy: 50
-  maxEnergy: 50
-  progressMultiplier: 5
-  usedProgressMultiplier: 0
-  countDown: 0
-  SetCountDown: 4
-  gameState: 0
-  levelIndicator: {fileID: 0}
+  Items:
+  - Name: Focus
+    Active: 0
+    duration: 5
+    countUp: 0
+  - Name: BrainStorm
+    Active: 0
+    duration: 5
+    countUp: 0
+  focusUI: {fileID: 0}
+  brainStormUI: {fileID: 0}

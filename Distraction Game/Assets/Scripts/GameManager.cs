@@ -12,14 +12,16 @@ public class GameManager : MonoBehaviour
     [HideInInspector]public float currentDeadline;
     [HideInInspector]public float progress;
 
-    [Range(0f,100f)]
+    [Range(0f, 100f)]
     public float energy = 100f;
+    public float maxEnergy = 50f;
     public float progressMultiplier = 2f;
     [HideInInspector] public float usedProgressMultiplier;
 
     [HideInInspector]public float countDown;
     [SerializeField] float SetCountDown = 5f;
     public State gameState;
+    [SerializeField] GameObject levelIndicator;
 
     PlayerScript player;
     private void Start()
@@ -32,13 +34,17 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        energy = Mathf.Clamp(energy, 0f, 100f);
+        energy = Mathf.Clamp(energy, 0f, maxEnergy);
         currentDeadline = Mathf.Clamp(currentDeadline, 0f, Deadline);
         if (gameState == State.COUNTDOWN)
         {
             countDown -= Time.deltaTime;
             if(countDown <= 0)
-            gameState = State.GAMEPLAY;
+            {
+                gameState = State.GAMEPLAY;
+                levelIndicator.SetActive(true);
+            }
+            
         }
         if (gameState == State.GAMEPLAY||gameState == State.DISTRACTED)
         {
@@ -61,6 +67,7 @@ public class GameManager : MonoBehaviour
         }
         else if(progress < 100f && currentDeadline <= 0)
         {
+            player.StopAllCoroutines();
             gameState = State.GAMEOVER;
             spawner.SetActive(false);
         }                    
