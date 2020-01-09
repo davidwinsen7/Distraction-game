@@ -20,12 +20,14 @@ public class PlayerScript : MonoBehaviour
     public GameObject[] distractedUI;
     GameManager manager;
     ItemManager ItmManager;
+    Animator camAnim;
     bool isBrainStorming;
     Resisting resistUIScript;
     private void Start()
     {
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         ItmManager = FindObjectOfType<ItemManager>().GetComponent<ItemManager>();
+        camAnim = FindObjectOfType<Camera>().GetComponent<Animator>();
     }
     void expressionHappy()
     {
@@ -40,7 +42,7 @@ public class PlayerScript : MonoBehaviour
     private void Update()
     {
         isBrainStorming = ItmManager.Items[(int)ItemManager.ItemCode.brainStorm].Active;
-        if(manager.energy <= 30)
+        if (manager.energy <= manager.maxEnergy / 5) 
         {
             expressionTired();
         }
@@ -60,6 +62,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
+                camAnim.SetTrigger("Shake1");
                 float duration = collision.GetComponent<DragAndDrop>().properties.duration;
                 float affectEnergy = collision.GetComponent<DragAndDrop>().properties.affectEnergy;
                 string name = collision.gameObject.name;
